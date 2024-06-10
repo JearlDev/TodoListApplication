@@ -7,7 +7,7 @@ const ListManager = () => {
     document.querySelectorAll('.list').forEach((list) => {
       list.classList.remove('active');
     });
-    e.target.classList.toggle('active');
+    e.classList.toggle('active');
   };
 
   return (
@@ -26,7 +26,7 @@ const ListManager = () => {
         </div>
         <div className="lists mt-12 w-full flex flex-col gap-3">
           <div
-            onClick={(e) => handleActiveList(e)}
+            onClick={(e) => handleActiveList(e.currentTarget)}
             className="list active py-3 px-5 border-2 border-tertiary w-full flex items-center justify-between text-primary rounded-[10px]"
           >
             <span className="list__label">Get Started</span>
@@ -37,7 +37,7 @@ const ListManager = () => {
             </span>
           </div>
           <div
-            onClick={(e) => handleActiveList(e)}
+            onClick={(e) => handleActiveList(e.currentTarget)}
             className="list py-3 px-5 border-2 border-tertiary w-full flex items-center justify-between text-primary rounded-[10px]"
           >
             <span className="list__label">FE Maintenance</span>
@@ -49,8 +49,12 @@ const ListManager = () => {
           </div>
         </div>
       </div>
-      <button className="btn add-task">
-        <FiPlus color="white" />
+      <button className="btn add-task bg-primary text-[#fff] rounded-[10px] py-3 px-10 border-2 border-primary transition-all duration-150 ease-out hover:bg-transparent hover:text-primary group flex gap-1.5 items-center">
+        <FiPlus
+          color="white"
+          className="group-hover:!text-primary transition-all duration-150 ease-out"
+          fontSize="1.35em"
+        />
         <span className="btn__text">New List</span>
       </button>
     </section>

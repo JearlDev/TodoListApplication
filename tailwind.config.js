@@ -31,7 +31,7 @@ module.exports = {
         secondary: '#ffffff',
         tertiary: '#f1f1f1',
         darkText: '#171717',
-        greyText: 'b6b6b6',
+        greyText: '#b6b6b6',
         lightText: '#FFFFFF',
         offWhite: '#Fcfcfc',
       },
