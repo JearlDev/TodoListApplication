@@ -25,3 +25,31 @@
   font-weight: 600;
   font-display: swap;
 }
+
+input,
+textarea,
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
+}
+
+.list-manager {
+  box-shadow: 0px 4px 9px 4px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0px 4px 9px 4px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0px 4px 9px 4px rgba(0, 0, 0, 0.05);
+}
+
+.list {
+  @apply hover:cursor-pointer transition-all duration-150 ease-out;
+}
+.list.active {
+  @apply border-primary border-l-[12px];
+}

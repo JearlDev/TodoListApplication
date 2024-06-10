@@ -29,7 +29,7 @@ module.exports = {
       colors: {
         primary: '#171717',
         secondary: '#ffffff',
-        tertiary: '#e3e3e3',
+        tertiary: '#f1f1f1',
         darkText: '#171717',
         greyText: 'b6b6b6',
         lightText: '#FFFFFF',
