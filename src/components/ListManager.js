@@ -16,7 +16,7 @@ const ListManager = () => {
       <section className="list-manager rounded-[75px] bg-[#fff] px-10 py-14 flex flex-col justify-between items-center min-h-full w-[450px] -xl:w-[350px] -lg:w-full -md:px-7">
         <div className="container h-full w-full flex flex-col items-center overflow-auto">
           <div className="container h-full w-full flex flex-col items-center min-h-[400px]">
-            <h1 className="heading text-primary text-[62px] font-[400]">
+            <h1 className="heading text-primary text-[62px] -md:text-[52px] font-[400]">
               To Do
             </h1>
             <div className="task-search bg-tertiary w-full flex items-center rounded-[10px] gap-2 px-3.5 mt-5">

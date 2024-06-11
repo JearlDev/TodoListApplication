@@ -15,7 +15,7 @@ const DeleteTaskModal = () => {
 
       {modalIsOpen && (
         <section className="task-modal fixed top-0 left-0 h-screen w-full bg-[#000]/80 flex justify-center items-center">
-          <div className="task-modal__wrapper rounded-[75px] bg-[#fff] px-14 py-14 flex flex-col gap-7 w-[450px]">
+          <div className="task-modal__wrapper rounded-[75px] bg-[#fff] px-14 py-14 flex flex-col gap-7 w-[450px] -md:w-[90%]">
             <div className="container flex justify-between">
               <h2 className="heading text-primary text-[32px] font-[400]">
                 Delete Task
