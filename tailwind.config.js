@@ -6,8 +6,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      primary: ['Verona', 'sans-serif'],
-      secondary: ['Inter', 'sans-serif'],
+      primary: ['Montserrat', 'sans-serif'],
     },
     extend: {
       screens: {
@@ -28,14 +27,13 @@ module.exports = {
         '@2xl': { min: '1280px', max: '1600px' },
       },
       colors: {
-        primary: '#EE763A',
-        secondary: '#41454E',
-        tertiary: '#171B23',
-        greyLight: '#d8d8d8',
-        darkText: '#171B23',
+        primary: '#171717',
+        secondary: '#ffffff',
+        tertiary: '#f1f1f1',
+        darkText: '#171717',
+        greyText: '#b6b6b6',
         lightText: '#FFFFFF',
-        checkbox: '#d8d8d8',
-        offWhite: '#FAF9F8',
+        offWhite: '#Fcfcfc',
       },
     },
   },
