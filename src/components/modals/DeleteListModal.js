@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FiPlus } from 'react-icons/fi';
 import { MdDelete } from 'react-icons/md';
 
 const DeleteListModal = () => {
@@ -8,7 +9,8 @@ const DeleteListModal = () => {
     <>
       <MdDelete
         onClick={() => setModalIsOpen(true)}
-        color="grey"
+        color="#cccccc"
+        className="hover:cursor-pointer hover:!text-[#b6b6b6] transition-all duration-150 ease-out"
         fontSize="1.75em"
       />
 
@@ -22,7 +24,7 @@ const DeleteListModal = () => {
               <FiPlus
                 onClick={() => setModalIsOpen(false)}
                 color="#171717"
-                className="hover:!text-primary/90 mt-1 !rotate-[45deg] transition-all duration-150 ease-out"
+                className="hover:!text-primary/80 hover:cursor-pointer mt-1 !rotate-[45deg] transition-all duration-150 ease-out"
                 fontSize="2.4em"
               />
             </div>

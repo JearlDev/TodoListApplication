@@ -1,24 +1,26 @@
 import React, { useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
 
-const NewListModal = () => {
+const NewTaskModal = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   return (
     <>
       <button
         onClick={() => setModalIsOpen(true)}
-        className="btn bg-primary text-[#fff] rounded-[10px] py-3 px-10 border-2 border-primary transition-all duration-150 ease-out hover:bg-[#000] hover:border-[#000] flex gap-1.5 items-center"
+        className="btn bg-primary text-[#fff] rounded-[10px] py-3 px-10 @xl:px-6 -md:px-4 border-2 border-primary transition-all duration-150 ease-out hover:bg-[#000] hover:border-[#000] flex gap-1.5 items-center"
       >
         <FiPlus color="white" fontSize="1.35em" />
-        <span className="btn__text">New List</span>
+        <span className="btn__text whitespace-nowrap">
+          <span className="-md:hidden">New</span> Task
+        </span>
       </button>
       {modalIsOpen && (
         <section className="list-modal fixed top-0 left-0 h-screen w-full bg-[#000]/80 flex justify-center items-center">
           <div className="list-modal__wrapper rounded-[75px] bg-[#fff] px-14 py-14 flex flex-col gap-7 w-[450px]">
             <div className="container flex justify-between">
               <h2 className="heading text-primary text-[32px] font-[400]">
-                New List
+                New Task
               </h2>
               <FiPlus
                 onClick={() => setModalIsOpen(false)}
@@ -53,4 +55,4 @@ const NewListModal = () => {
   );
 };
 
-export default NewListModal;
+export default NewTaskModal;

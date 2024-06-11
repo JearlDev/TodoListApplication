@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
-import { FaEdit } from 'react-icons/fa';
 import { FiPlus } from 'react-icons/fi';
 
-const EditListModal = () => {
+const DeleteTaskModal = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   return (
     <>
-      <FaEdit
+      <FiPlus
         onClick={() => setModalIsOpen(true)}
-        color="#cccccc"
-        className="hover:cursor-pointer hover:!text-[#b6b6b6] transition-all duration-150 ease-out"
-        fontSize="1.75em"
+        className="hover:!opacity-80 hover:cursor-pointer !rotate-[45deg] mt-[3px] transition-all duration-150 ease-out"
+        color="white"
+        fontSize="2.5em"
       />
 
       {modalIsOpen && (
-        <section className="list-modal fixed top-0 left-0 h-screen w-full bg-[#000]/80 flex justify-center items-center">
-          <div className="list-modal__wrapper rounded-[75px] bg-[#fff] px-14 py-14 flex flex-col gap-7 w-[450px]">
+        <section className="task-modal fixed top-0 left-0 h-screen w-full bg-[#000]/80 flex justify-center items-center">
+          <div className="task-modal__wrapper rounded-[75px] bg-[#fff] px-14 py-14 flex flex-col gap-7 w-[450px]">
             <div className="container flex justify-between">
               <h2 className="heading text-primary text-[32px] font-[400]">
-                Edit List
+                Delete Task
               </h2>
               <FiPlus
                 onClick={() => setModalIsOpen(false)}
@@ -28,14 +27,14 @@ const EditListModal = () => {
                 fontSize="2.4em"
               />
             </div>
-            <input
-              type="text"
-              className="modal-input bg-tertiary w-full flex items-center rounded-[10px] px-6 mt-4 py-[14px] placeholder:text-greyText outline-none appearance-none"
-              placeholder="List Name"
-            />
+            <p className="mt-7">
+              Are you really sure you want to delete the "
+              <span>Do this thing</span>" task?
+            </p>
+            <p className="mt-4">This cannot be undone.</p>
             <div className="btn-wrapper flex items-center gap-5">
-              <button className="btn bg-primary text-[#fff] rounded-[10px] py-3 px-10 border-2 border-primary transition-all duration-150 ease-out hover:bg-[#000] hover:border-[#000] flex items-center">
-                Save Changes
+              <button className="btn bg-red-500 text-[#fff] rounded-[10px] py-3 px-10 border-2 border-red-500 transition-all duration-150 ease-out hover:bg-red-600 hover:border-red-600 flex items-center">
+                Delete
               </button>
               <button
                 onClick={() => setModalIsOpen(false)}
@@ -51,4 +50,4 @@ const EditListModal = () => {
   );
 };
 
-export default EditListModal;
+export default DeleteTaskModal;
