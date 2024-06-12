@@ -33,7 +33,7 @@ const TaskManager = () => {
           <NewTaskModal />
         </div>
       </div>
-      <div className="tasks w-full flex flex-col mt-14 gap-3">
+      <div className="tasks w-full flex flex-col mt-14 -md:mt-10 gap-3">
         <div className="task bg-primary text-[#fff] rounded-[10px] py-3 px-6 border-2 border-primary transition-all duration-150 ease-out flex justify-between items-center">
           <div className="container flex gap-4 items-center hover:cursor-pointer">
             <div className="task__checkbox h-5 w-5 bg-[#fff] rounded-[5px]"></div>

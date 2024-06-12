@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
 
-const NewListModal = () => {
+const NewListModal = ({ lists, setLists }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [listName, setListName] = useState('');
+  const [listError, setListError] = useState('');
 
   return (
     <>
@@ -29,12 +31,31 @@ const NewListModal = () => {
             </div>
             <input
               type="text"
+              onChange={(e) => {
+                setListName(e.target.value);
+                setListError(
+                  e.target.value === '' ? 'Please add a list name' : ''
+                );
+              }}
               className="modal-input bg-tertiary w-full flex items-center rounded-[10px] px-6 mt-4 py-[14px] placeholder:text-greyText outline-none appearance-none"
               placeholder="List Name"
             />
+            {listError !== '' ? (
+              <p className="form-error text-red-600 mt-[-10px]">{listError}</p>
+            ) : null}
             <div className="btn-wrapper flex items-center gap-5">
               <button
-                id="create-list"
+                onClick={() => {
+                  if (listName !== '') {
+                    setLists((prevLists) => [
+                      ...prevLists,
+                      { name: listName, isActive: false },
+                    ]);
+                    setModalIsOpen(false);
+                  } else {
+                    setListError('Please add a list name');
+                  }
+                }}
                 className="btn bg-primary text-[#fff] rounded-[10px] py-3 px-10 border-2 border-primary transition-all duration-150 ease-out hover:bg-[#000] hover:border-[#000] flex items-center"
               >
                 Create
