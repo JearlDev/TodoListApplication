@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
 
-const NewTaskModal = () => {
+const NewTaskModal = ({ lists, setLists, activeList }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [taskName, setTaskName] = useState('');
+  const [taskError, setTaskError] = useState('');
 
   return (
     <>
@@ -31,18 +33,56 @@ const NewTaskModal = () => {
             </div>
             <input
               type="text"
+              onChange={(e) => {
+                setTaskName(e.target.value);
+                setTaskError(
+                  e.target.value === '' ? 'Please add a task name' : ''
+                );
+              }}
               className="modal-input bg-tertiary w-full flex items-center rounded-[10px] px-6 mt-4 py-[14px] placeholder:text-greyText outline-none appearance-none"
               placeholder="List Name"
             />
+            {taskError !== '' ? (
+              <p className="form-error text-red-600 mt-[-10px]">{taskError}</p>
+            ) : null}
             <div className="btn-wrapper flex items-center gap-5">
               <button
-                id="create-list"
+                onClick={() => {
+                  if (activeList && taskName !== '') {
+                    // Create a new task object
+                    const newTask = {
+                      name: taskName,
+                      isComplete: false,
+                    };
+
+                    // Update the tasks array for the active list
+                    setLists((prevLists) => {
+                      return prevLists.map((list) => {
+                        if (list.isActive) {
+                          return {
+                            ...list,
+                            tasks: [...(list.tasks || []), newTask], // Add new task to the tasks array
+                          };
+                        }
+                        return list;
+                      });
+                    });
+                    setTaskName('');
+                    setModalIsOpen(false);
+                  } else {
+                    setTaskError('Please add a task name');
+                    console.error('No active list found');
+                  }
+                }}
                 className="btn bg-primary text-[#fff] rounded-[10px] py-3 px-10 border-2 border-primary transition-all duration-150 ease-out hover:bg-[#000] hover:border-[#000] flex items-center"
               >
                 Create
               </button>
               <button
-                onClick={() => setModalIsOpen(false)}
+                onClick={() => {
+                  setTaskName('');
+                  setModalIsOpen(false);
+                }}
                 className="btn text-primary py-3 px-2 border-2 border-transparent transition-all duration-150 ease-out hover:text-primary/80"
               >
                 Cancel

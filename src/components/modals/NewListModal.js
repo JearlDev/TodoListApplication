@@ -49,8 +49,9 @@ const NewListModal = ({ lists, setLists }) => {
                   if (listName !== '') {
                     setLists((prevLists) => [
                       ...prevLists,
-                      { name: listName, isActive: false },
+                      { name: listName, isActive: false, tasks: [] },
                     ]);
+                    setListName('');
                     setModalIsOpen(false);
                   } else {
                     setListError('Please add a list name');
@@ -61,7 +62,10 @@ const NewListModal = ({ lists, setLists }) => {
                 Create
               </button>
               <button
-                onClick={() => setModalIsOpen(false)}
+                onClick={() => {
+                  setListName('');
+                  setModalIsOpen(false);
+                }}
                 className="btn text-primary py-3 px-2 border-2 border-transparent transition-all duration-150 ease-out hover:text-primary/80"
               >
                 Cancel

@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaEdit } from 'react-icons/fa';
 import { FiPlus } from 'react-icons/fi';
 
-const EditListModal = () => {
+const EditListModal = ({ lists, setLists, currListName }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [listName, setListName] = useState(currListName);
+  const [listError, setListError] = useState('');
 
   return (
     <>
       <FaEdit
-        onClick={() => setModalIsOpen(true)}
+        onClick={() => {
+          setListName(lists.find((list) => list.isActive).name);
+          setModalIsOpen(true);
+        }}
         color="#cccccc"
         className="hover:cursor-pointer hover:!text-[#b6b6b6] transition-all duration-150 ease-out"
         fontSize="1.75em"
@@ -30,15 +35,47 @@ const EditListModal = () => {
             </div>
             <input
               type="text"
+              value={listName}
+              onChange={(e) => {
+                setListName(e.target.value);
+                setListError(
+                  e.target.value === '' ? 'Please add a list name' : ''
+                );
+              }}
               className="modal-input bg-tertiary w-full flex items-center rounded-[10px] px-6 mt-4 py-[14px] placeholder:text-greyText outline-none appearance-none"
               placeholder="List Name"
             />
+            {listError !== '' ? (
+              <p className="form-error text-red-600 mt-[-10px]">{listError}</p>
+            ) : null}
             <div className="btn-wrapper flex items-center gap-5">
-              <button className="btn bg-primary text-[#fff] rounded-[10px] py-3 px-10 -md:px-5 border-2 border-primary transition-all duration-150 ease-out hover:bg-[#000] hover:border-[#000] flex items-center whitespace-nowrap">
+              <button
+                onClick={() => {
+                  if (listName !== '') {
+                    const updatedLists = lists.map((list) => {
+                      if (list.isActive) {
+                        return {
+                          ...list,
+                          name: listName,
+                        };
+                      }
+                      return list;
+                    });
+                    setLists(updatedLists);
+                    setModalIsOpen(false);
+                  } else {
+                    setListError('Please add a list name');
+                  }
+                }}
+                className="btn bg-primary text-[#fff] rounded-[10px] py-3 px-10 -md:px-5 border-2 border-primary transition-all duration-150 ease-out hover:bg-[#000] hover:border-[#000] flex items-center whitespace-nowrap"
+              >
                 Save Changes
               </button>
               <button
-                onClick={() => setModalIsOpen(false)}
+                onClick={() => {
+                  setListName(currListName);
+                  setModalIsOpen(false);
+                }}
                 className="btn text-primary py-3 px-2 border-2 border-transparent transition-all duration-150 ease-out hover:text-primary/80"
               >
                 Cancel
