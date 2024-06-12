@@ -28,17 +28,16 @@ const DeleteListModal = ({ lists, setLists, activeList }) => {
                 fontSize="2.4em"
               />
             </div>
-            <p className="mt-7">
+            <p className="mt-0">
               Are you really sure you want to delete the "
               <span className="font-[600]">{activeList.name}</span>" list?
             </p>
-            <p className="mt-4">
+            <p className="mt-[-10px]">
               This cannot be undone and all tasks will be lost.
             </p>
             <div className="btn-wrapper flex items-center gap-5">
               <button
                 onClick={() => {
-                  console.log('clickes');
                   const updatedLists = lists.filter((list) => !list.isActive);
                   setLists(updatedLists);
 

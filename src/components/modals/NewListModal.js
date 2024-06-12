@@ -47,9 +47,19 @@ const NewListModal = ({ lists, setLists }) => {
               <button
                 onClick={() => {
                   if (listName !== '') {
+                    const deactivatedLists = lists.map((list) => {
+                      if (list.isActive) {
+                        return {
+                          ...list,
+                          isActive: false,
+                        };
+                      }
+                      return list;
+                    });
+                    setLists(deactivatedLists);
                     setLists((prevLists) => [
                       ...prevLists,
-                      { name: listName, isActive: false, tasks: [] },
+                      { name: listName, isActive: true, tasks: [] },
                     ]);
                     setListName('');
                     setModalIsOpen(false);

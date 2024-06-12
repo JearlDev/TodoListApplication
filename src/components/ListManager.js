@@ -8,7 +8,7 @@ const ListManager = () => {
   const [lists, setLists] = useState([]);
 
   // useEffect(() => {
-  //   console.log(lists);
+  //   localStorage.setItem('lists', lists);
   // }, [lists]);
 
   return (
@@ -49,9 +49,13 @@ const ListManager = () => {
                   >
                     <span className="list__label">{list.name}</span>
                     <span className="list__task-count task-count flex gap-1">
-                      <span className="task-count__completed">0</span>
+                      <span className="task-count__completed">
+                        {list.tasks.filter((task) => task.isComplete).length}
+                      </span>
                       <span className="task-count__separator">/</span>
-                      <span className="task-count__total">10</span>
+                      <span className="task-count__total">
+                        {list.tasks.length}
+                      </span>
                     </span>
                   </div>
                 );

@@ -2,13 +2,21 @@ import React, { useState } from 'react';
 import { FaEdit } from 'react-icons/fa';
 import { FiPlus } from 'react-icons/fi';
 
-const EditTaskModal = () => {
+const EditTaskModal = ({ lists, setLists, taskIndex }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [taskName, setTaskName] = useState('');
+  const [taskError, setTaskError] = useState('');
 
   return (
     <>
       <FaEdit
-        onClick={() => setModalIsOpen(true)}
+        onClick={() => {
+          setTaskError('');
+          setTaskName(
+            lists.find((list) => list.isActive).tasks[taskIndex].name
+          );
+          setModalIsOpen(true);
+        }}
         color="white"
         className="hover:!opacity-80 hover:cursor-pointer transition-all duration-150 ease-out"
         fontSize="1.75em"
@@ -30,12 +38,44 @@ const EditTaskModal = () => {
             </div>
             <input
               type="text"
-              className="modal-input bg-tertiary w-full flex items-center rounded-[10px] px-6 mt-4 py-[14px] placeholder:text-greyText outline-none appearance-none"
+              value={taskName}
+              onChange={(e) => {
+                setTaskName(e.target.value);
+                setTaskError(
+                  e.target.value === '' ? 'Please add a task name' : ''
+                );
+              }}
+              className="modal-input bg-tertiary w-full flex items-center rounded-[10px] px-6 mt-4 py-[14px] text-primary placeholder:text-greyText outline-none appearance-none"
               placeholder="Task Name"
             />
+            {taskError !== '' ? (
+              <p className="form-error text-red-600 mt-[-10px]">{taskError}</p>
+            ) : null}
             <div className="btn-wrapper flex items-center gap-5">
               <button
-                id="create-list"
+                onClick={() => {
+                  if (taskName !== '') {
+                    setLists((prevLists) =>
+                      prevLists.map((list) => {
+                        if (list.isActive) {
+                          return {
+                            ...list,
+                            tasks: list.tasks.map((task, index) => {
+                              if (index === taskIndex) {
+                                return { ...task, name: taskName };
+                              }
+                              return task;
+                            }),
+                          };
+                        }
+                        return list;
+                      })
+                    );
+                    setModalIsOpen(false);
+                  } else {
+                    setTaskError('Please add a task name');
+                  }
+                }}
                 className="btn bg-primary text-[#fff] rounded-[10px] py-3 px-10 -md:px-5 border-2 border-primary transition-all duration-150 ease-out hover:bg-[#000] hover:border-[#000] flex items-center whitespace-nowrap"
               >
                 Save Changes

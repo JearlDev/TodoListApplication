@@ -68,12 +68,14 @@ const TaskManager = ({ lists, setLists }) => {
               return (
                 <div
                   key={i}
-                  onClick={() => handleTaskClick(i)}
                   className={`task bg-primary text-[#fff] rounded-[10px] py-3 px-6 border-2 border-primary transition-all duration-150 ease-out flex justify-between items-center ${
                     task.isComplete ? 'complete' : ''
                   }`}
                 >
-                  <div className="container flex gap-4 items-center hover:cursor-pointer">
+                  <div
+                    onClick={() => handleTaskClick(i)}
+                    className="container group flex gap-4 items-center hover:cursor-pointer"
+                  >
                     {task.isComplete ? (
                       <TiTick
                         color="white"
@@ -81,11 +83,11 @@ const TaskManager = ({ lists, setLists }) => {
                         className="mx-[-5px]"
                       />
                     ) : (
-                      <div className="task__checkbox h-5 w-5 bg-[#fff] rounded-[5px]"></div>
+                      <div className="task__checkbox group-hover:opacity-80 transition-all duration-150 ease-out h-5 w-5 bg-[#fff] rounded-[5px]"></div>
                     )}
 
                     <div
-                      className={`task__name text-[#fff] ${
+                      className={`task__name text-[#fff] group-hover:text-white/80 transition-all duration-150 ease-out ${
                         task.isComplete ? 'line-through' : ''
                       }`}
                     >
@@ -93,8 +95,18 @@ const TaskManager = ({ lists, setLists }) => {
                     </div>
                   </div>
                   <div className="container flex gap-3 justify-end items-center">
-                    {!task.isComplete && <EditTaskModal />}
-                    <DeleteTaskModal />
+                    {!task.isComplete && (
+                      <EditTaskModal
+                        lists={lists}
+                        setLists={setLists}
+                        taskIndex={i}
+                      />
+                    )}
+                    <DeleteTaskModal
+                      lists={lists}
+                      setLists={setLists}
+                      taskIndex={i}
+                    />
                   </div>
                 </div>
               );
