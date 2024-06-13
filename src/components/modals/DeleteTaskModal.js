@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
 
-const DeleteTaskModal = () => {
+const DeleteTaskModal = ({ lists, setLists, taskIndex }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   return (
@@ -27,13 +27,38 @@ const DeleteTaskModal = () => {
                 fontSize="2.4em"
               />
             </div>
-            <p className="mt-7">
+            <p className="mt-0 text-primary">
               Are you really sure you want to delete the "
-              <span>Do this thing</span>" task?
+              <span className="font-[600]">
+                {lists.find((list) => list.isActive).tasks[taskIndex].name}
+              </span>
+              " task?
             </p>
-            <p className="mt-4">This cannot be undone.</p>
+            <p className="text-primary">This cannot be undone.</p>
             <div className="btn-wrapper flex items-center gap-5">
-              <button className="btn bg-red-500 text-[#fff] rounded-[10px] py-3 px-10 border-2 border-red-500 transition-all duration-150 ease-out hover:bg-red-600 hover:border-red-600 flex items-center">
+              <button
+                onClick={() => {
+                  setLists((prevLists) =>
+                    prevLists.map((list) => {
+                      if (list.isActive) {
+                        return {
+                          ...list,
+                          tasks: list.tasks.filter(
+                            (task) =>
+                              task.name !==
+                              lists.find((list) => list.isActive).tasks[
+                                taskIndex
+                              ].name
+                          ),
+                        };
+                      }
+                      return list;
+                    })
+                  );
+                  setModalIsOpen(false);
+                }}
+                className="btn bg-red-500 text-[#fff] rounded-[10px] py-3 px-10 border-2 border-red-500 transition-all duration-150 ease-out hover:bg-red-600 hover:border-red-600 flex items-center"
+              >
                 Delete
               </button>
               <button

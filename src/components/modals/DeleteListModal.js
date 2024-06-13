@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
 import { MdDelete } from 'react-icons/md';
 
-const DeleteListModal = () => {
+const DeleteListModal = ({ lists, setLists, activeList }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   return (
@@ -28,15 +28,23 @@ const DeleteListModal = () => {
                 fontSize="2.4em"
               />
             </div>
-            <p className="mt-7">
+            <p className="mt-0">
               Are you really sure you want to delete the "
-              <span>Get Started</span>" list?
+              <span className="font-[600]">{activeList.name}</span>" list?
             </p>
-            <p className="mt-4">
+            <p className="mt-[-10px]">
               This cannot be undone and all tasks will be lost.
             </p>
             <div className="btn-wrapper flex items-center gap-5">
-              <button className="btn bg-red-500 text-[#fff] rounded-[10px] py-3 px-10 border-2 border-red-500 transition-all duration-150 ease-out hover:bg-red-600 hover:border-red-600 flex items-center">
+              <button
+                onClick={() => {
+                  const updatedLists = lists.filter((list) => !list.isActive);
+                  setLists(updatedLists);
+
+                  setModalIsOpen(false);
+                }}
+                className="btn bg-red-500 text-[#fff] rounded-[10px] py-3 px-10 border-2 border-red-500 transition-all duration-150 ease-out hover:bg-red-600 hover:border-red-600 flex items-center"
+              >
                 Delete
               </button>
               <button
