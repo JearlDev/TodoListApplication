@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
 
 const NewListModal = ({ lists, setLists }) => {
