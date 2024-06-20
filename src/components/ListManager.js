@@ -24,44 +24,48 @@ const ListManager = ({ lists, setLists, searchTerm, setSearchTerm }) => {
             />
           </div>
           <div className="lists mt-12 w-full flex flex-col gap-3 mb-12 h-full overflow-auto">
-            {lists.map((list, i) => {
-              return (
-                <div
-                  key={i}
-                  onClick={() => {
-                    setLists((prevLists) => {
-                      return prevLists.map((item, index) => {
-                        if (index === i) {
-                          return { ...item, isActive: true };
-                        } else {
-                          return { ...item, isActive: false };
-                        }
+            {lists.length > 0 &&
+              lists.map((list, i) => {
+                return (
+                  <div
+                    key={i}
+                    onClick={() => {
+                      setLists((prevLists) => {
+                        return prevLists.map((item, index) => {
+                          if (index === i) {
+                            return { ...item, isActive: true };
+                          } else {
+                            return { ...item, isActive: false };
+                          }
+                        });
                       });
-                    });
-                  }}
-                  className={`list ${
-                    list.isActive ? 'active' : ''
-                  } py-3 px-5 border-2 border-tertiary w-full flex items-center justify-between text-primary rounded-[10px]`}
-                >
-                  <span className="list__label">{list.name}</span>
-                  <span className="list__task-count task-count flex gap-1">
-                    {list.tasks.length > 0 ? (
-                      <>
-                        <span className="task-count__completed">
-                          {list.tasks.filter((task) => task.isComplete).length}
-                        </span>
-                        <span className="task-count__separator">/</span>
-                        <span className="task-count__total">
-                          {list.tasks.length}
-                        </span>
-                      </>
-                    ) : (
-                      <span className="task-count__separator">-</span>
-                    )}
-                  </span>
-                </div>
-              );
-            })}
+                    }}
+                    className={`list ${
+                      list.isActive ? 'active' : ''
+                    } py-3 px-5 border-2 border-tertiary w-full flex items-center justify-between text-primary rounded-[10px]`}
+                  >
+                    <span className="list__label">{list.name}</span>
+                    <span className="list__task-count task-count flex gap-1">
+                      {list.tasks.length > 0 ? (
+                        <>
+                          <span className="task-count__completed">
+                            {
+                              list.tasks.filter((task) => task.isComplete)
+                                .length
+                            }
+                          </span>
+                          <span className="task-count__separator">/</span>
+                          <span className="task-count__total">
+                            {list.tasks.length}
+                          </span>
+                        </>
+                      ) : (
+                        <span className="task-count__separator">-</span>
+                      )}
+                    </span>
+                  </div>
+                );
+              })}
           </div>
         </div>
         <NewListModal lists={lists} setLists={setLists} />
