@@ -5,10 +5,16 @@ import ListManager from '../components/ListManager';
 import TaskManager from '../components/TaskManager';
 
 const IndexPage = () => {
-  const storedLists = localStorage.getItem('lists');
-  const parsedLists = JSON.parse(storedLists);
-  const [lists, setLists] = useState(parsedLists);
+  const [lists, setLists] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    const storedLists =
+      typeof window !== `undefined` && localStorage.getItem('lists');
+    const parsedLists = JSON.parse(storedLists);
+
+    setLists(parsedLists);
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('lists', JSON.stringify(lists));
