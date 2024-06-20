@@ -5,12 +5,14 @@ import TaskManager from '../components/TaskManager';
 import NewListModal from './modals/NewListModal';
 
 const ListManager = () => {
-  const [lists, setLists] = useState([]);
+  const storedLists = localStorage.getItem('lists');
+  const parsedLists = JSON.parse(storedLists);
+  const [lists, setLists] = useState(parsedLists);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // useEffect(() => {
-  //   localStorage.setItem('lists', JSON.stringify(lists));
-  // }, [lists]);
+  useEffect(() => {
+    localStorage.setItem('lists', JSON.stringify(lists));
+  }, [lists]);
 
   return (
     <>
