@@ -11,11 +11,11 @@ import NewTaskModal from './modals/NewTaskModal';
 
 const TaskManager = ({ lists, setLists, searchTerm }) => {
   const [activeList, setActiveList] = useState(
-    lists && lists.find((list) => list.isActive)
+    lists ? lists.find((list) => list.isActive) : 0
   );
 
   useEffect(() => {
-    setActiveList(lists && lists.find((list) => list.isActive));
+    setActiveList(lists ? lists.find((list) => list.isActive) : 0);
   }, [lists]);
 
   const handleTaskClick = (taskIndex) => {
