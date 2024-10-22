@@ -4,7 +4,7 @@
 module.exports = {
   siteMetadata: {
     title: `todoListApp`,
-    siteUrl: `https://www.yourdomain.tld`
+    siteUrl: `https://jearltodolistapp.netlify.app/`,
   },
-  plugins: ["gatsby-plugin-postcss"]
+  plugins: ['gatsby-plugin-postcss'],
 };
