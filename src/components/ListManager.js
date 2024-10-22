@@ -24,7 +24,8 @@ const ListManager = ({ lists, setLists, searchTerm, setSearchTerm }) => {
             />
           </div>
           <div className="lists mt-12 w-full flex flex-col gap-3 mb-12 h-full overflow-auto">
-            {lists.length > 0 &&
+            {lists &&
+              lists.length > 0 &&
               lists.map((list, i) => {
                 return (
                   <div

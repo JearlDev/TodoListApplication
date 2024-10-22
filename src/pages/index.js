@@ -13,7 +13,17 @@ const IndexPage = () => {
       typeof window !== `undefined` && localStorage.getItem('lists');
     const parsedLists = JSON.parse(storedLists);
 
-    setLists(parsedLists);
+    if (parsedLists && parsedLists.length > 0) {
+      setLists(parsedLists);
+    } else {
+      setLists([
+        {
+          name: 'Example List',
+          isActive: 'true',
+          tasks: [{ name: 'Example Task', isComplete: false }],
+        },
+      ]);
+    }
   }, []);
 
   useEffect(() => {
